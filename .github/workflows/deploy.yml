@@ -20,7 +20,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.10'  # Use string format for compatibility
+          python-version: '3.10'
 
       - name: Install dependencies from requirements.txt
         run: |
@@ -47,10 +47,10 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
 
-      - name: SSH into VM, pull latest code and run main.py
+      - name: SSH into VM, pull latest code and run app/main.py
         run: |
           ssh ${{ secrets.USERNAME }}@${{ secrets.HOST }} << 'EOF'
             cd ${{ secrets.TARGET_DIR }}
             git pull origin main
-            python3 main.py
+            python3 app/main.py
           EOF
